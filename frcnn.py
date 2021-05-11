@@ -25,7 +25,7 @@ from utils.utils import DecodeBox, get_new_img_size, loc2bbox, nms
 #--------------------------------------------#
 class FRCNN(object):
     _defaults = {
-        "model_path"    : 'model_data/voc_weights_resnet.pth',
+        "model_path"    : 'logs/Epoch100.pth',
         "classes_path"  : 'model_data/voc_classes.txt',
         "confidence"    : 0.5,
         "iou"           : 0.3,
