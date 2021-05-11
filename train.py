@@ -147,7 +147,7 @@ if __name__ == "__main__":
     #------------------------------------------------------#
     if True:
         lr = 1e-4
-        Batch_size = 2
+        Batch_size = 8
         Init_Epoch = 0
         Freeze_Epoch = 50
         
@@ -182,7 +182,7 @@ if __name__ == "__main__":
 
     if True:
         lr = 1e-5
-        Batch_size = 2
+        Batch_size = 4
         Freeze_Epoch = 50
         Unfreeze_Epoch = 100
 
