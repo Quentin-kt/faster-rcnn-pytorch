@@ -39,12 +39,12 @@ class mAP_FRCNN(FRCNN):
     def detect_image(self,image_id,image):
         self.confidence = 0.01
         self.iou        = 0.45
-        f = open("./input/detection-results/"+image_id+".txt","w") 
+        f = open("./input/input_1/detection-results/"+image_id+".txt","w")
 
         image_shape = np.array(np.shape(image)[0:2])
         old_width, old_height = image_shape[1], image_shape[0]
         old_image = copy.deepcopy(image)
-        
+
         #---------------------------------------------------------#
         #   给原图像进行resize，resize到短边为600的大小上
         #---------------------------------------------------------#
@@ -79,7 +79,7 @@ class mAP_FRCNN(FRCNN):
 
             bbox[:, 0::2] = (bbox[:, 0::2]) / width * old_width
             bbox[:, 1::2] = (bbox[:, 1::2]) / height * old_height
-            
+
         for i, c in enumerate(label):
             predicted_class = self.class_names[int(c)]
             score = str(conf[i])
@@ -88,24 +88,24 @@ class mAP_FRCNN(FRCNN):
             f.write("%s %s %s %s %s %s\n" % (predicted_class, score[:6], str(int(left)), str(int(top)), str(int(right)),str(int(bottom))))
 
         f.close()
-        return 
+        return
 
 frcnn = mAP_FRCNN()
 image_ids = open('VOCdevkit/VOC2007/ImageSets/Main/test.txt').read().strip().split()
 
-if not os.path.exists("./input"):
-    os.makedirs("./input")
-if not os.path.exists("./input/detection-results"):
-    os.makedirs("./input/detection-results")
-if not os.path.exists("./input/images-optional"):
-    os.makedirs("./input/images-optional")
+if not os.path.exists("./input/input_1"):
+    os.makedirs("./input/input_1")
+if not os.path.exists("./input/input_1/detection-results"):
+    os.makedirs("./input/input_1/detection-results")
+if not os.path.exists("./input/input_1/images-optional"):
+    os.makedirs("./input/input_1/images-optional")
 
 
 for image_id in tqdm(image_ids):
     image_path = "./VOCdevkit/VOC2007/JPEGImages/"+image_id+".jpg"
     image = Image.open(image_path)
     image = image.convert("RGB")
-    # image.save("./input/images-optional/"+image_id+".jpg")
+    # image.save("./input/input_1/images-optional/"+image_id+".png")
     frcnn.detect_image(image_id,image)
     
 
